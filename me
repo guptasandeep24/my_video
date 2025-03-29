@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Media Hub</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --success-color: #2ecc71;
+            --gray-color: #95a5a6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .responsive-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn.primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn.secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn.secondary:hover {
+            background-color: #27ae60;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+        }
+
+        .logo h1 span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        .language-selector select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-size: 0.9rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        /* Media Section */
+        .media-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .media-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--dark-color);
+        }
+
+        .media-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #777;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-card video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-card h3 {
+            padding: 15px;
+            font-size: 1.2rem;
+        }
+
+        .video-card p {
+            padding: 0 15px 15px;
+            color: #666;
+        }
+
+        .live-stream {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .stream-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .stream-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .stream-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .stream-info p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .stream-chat {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .stream-chat input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .stream-chat button {
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .youtube-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .youtube-video {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .youtube-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .youtube-video h3 {
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 60px 0;
+            background-color: #f5f7fa;
+        }
+
+        .tools-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--dark-color);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .tool-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .tool-btn {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .tool-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .features-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--dark-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .feature-card:hover i,
+        .feature-card:hover h3,
+        .feature-card:hover p {
+            color: white;
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-col i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* RTL Styles */
+        .rtl {
+            direction: rtl;
+        }
+        .rtl .footer-col h3::after {
+            left: auto;
+            right: 0;
+        }
+        .rtl .footer-col i {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .live-stream {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin-bottom: 15px;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .video-grid, .youtube-grid, .tools-grid, .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 0 40px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Global<span>Media</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#media">Media</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <select id="language-select">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-i18n="hero_title">Welcome to Global Media Hub</h1>
+                <p data-i18n="hero_text">Access videos, live streams, PDF tools and more in your preferred language</p>
+                <div class="cta-buttons">
+                    <a href="#media" class="btn primary" data-i18n="explore_btn">Explore Media</a>
+                    <a href="#tools" class="btn secondary" data-i18n="tools_btn">Try Our Tools</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/600x400" alt="Global Media" class="responsive-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="media" class="media-section">
+        <div class="container">
+            <h2 data-i18n="media_title">Multimedia Content</h2>
+            <div class="media-tabs">
+                <button class="tab-btn active" data-tab="videos" data-i18n="videos_tab">Videos</button>
+                <button class="tab-btn" data-tab="live" data-i18n="live_tab">Live Streams</button>
+                <button class="tab-btn" data-tab="youtube" data-i18n="youtube_tab">YouTube</button>
+            </div>
+            
+            <div class="tab-content active" id="videos-tab">
+                <div class="video-grid">
+                    <div class="video-card">
+                        <video controls poster="https://via.placeholder.com/300x200">
+                            <source src="sample.mp4" type="video/mp4">
+                            <span data-i18n="video_not_supported">Your browser does not support the video tag.</span>
+                        </video>
+                        <h3 data-i18n="video1_title">Introduction to Our Platform</h3>
+                        <p data-i18n="video1_desc">Learn how to use all features of our website</p>
+                    </div>
+                    <div class="video-card">
+                        <video controls poster="https://via.placeholder.com/300x200">
+                            <source src="sample.mp4" type="video/mp4">
+                            <span data-i18n="video_not_supported">Your browser does not support the video tag.</span>
+                        </video>
+                        <h3 data-i18n="video2_title">Language Switching Guide</h3>
+                        <p data-i18n="video2_desc">How to change languages on our platform</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="live-tab">
+                <div class="live-stream">
+                    <div class="stream-container">
+                        <iframe src="https://www.youtube.com/embed/live_stream?channel=UC_x5XG1OV2P6uZZ5FSM9Ttw" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="stream-info">
+                        <h3 data-i18n="live_title">Live Broadcast</h3>
+                        <p data-i18n="live_text">Join our live stream for real-time content</p>
+                        <div class="stream-chat">
+                            <div class="chat-messages">
+                                <!-- Chat messages will appear here -->
+                            </div>
+                            <input type="text" placeholder="Type your message" data-i18n-ph="chat_placeholder">
+                            <button data-i18n="send_btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="youtube-tab">
+                <div class="youtube-grid">
+                    <div class="youtube-video">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <h3 data-i18n="yt1_title">Featured Content</h3>
+                    </div>
+                    <div class="youtube-video">
+                        <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <h3 data-i18n="yt2_title">Popular Video</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <h2 data-i18n="tools_title">PDF & Image Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3 data-i18n="pdf_merge">PDF Merger</h3>
+                    <p data-i18n="pdf_merge_desc">Combine multiple PDF files into one</p>
+                    <button class="tool-btn" data-i18n="use_tool">Use Tool</button>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-file-image"></i>
+                    <h3 data-i18n="image_convert">Image Converter</h3>
+                    <p data-i18n="image_convert_desc">Convert between JPG, PNG, WEBP</p>
+                    <button class="tool-btn" data-i18n="use_tool">Use Tool</button>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-file-archive"></i>
+                    <h3 data-i18n="pdf_compress">PDF Compressor</h3>
+                    <p data-i18n="pdf_compress_desc">Reduce PDF file size</p>
+                    <button class="tool-btn" data-i18n="use_tool">Use Tool</button>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-images"></i>
+                    <h3 data-i18n="image_editor">Image Editor</h3>
+                    <p data-i18n="image_editor_desc">Crop, resize and edit images</p>
+                    <button class="tool-btn" data-i18n="use_tool">Use Tool</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2 data-i18n="features_title">Why Choose Our Platform</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-language"></i>
+                    <h3 data-i18n="feature1_title">Multi-Language</h3>
+                    <p data-i18n="feature1_text">Content available in multiple languages</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3 data-i18n="feature2_title">Responsive Design</h3>
+                    <p data-i18n="feature2_text">Works on all devices</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tools"></i>
+                    <h3 data-i18n="feature3_title">Powerful Tools</h3>
+                    <p data-i18n="feature3_text">PDF and image processing tools</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h3 data-i18n="feature4_title">Rich Media</h3>
+                    <p data-i18n="feature4_text">Videos, live streams and more</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 data-i18n="footer_about">About Us</h3>
+                    <p data-i18n="footer_about_text">Global Media Hub provides multilingual content and tools for users worldwide.</p>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer_links">Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_home">Home</a></li>
+                        <li><a href="#media" data-i18n="footer_media">Media</a></li>
+                        <li><a href="#tools" data-i18n="footer_tools">Tools</a></li>
+                        <li><a href="#about" data-i18n="footer_about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer_contact">Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@globalmedia.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer_copyright">&copy; 2023 Global Media Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.querySelector('nav').classList.remove('active');
+            });
+        });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Tool buttons functionality
+        document.querySelectorAll('.tool-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('This tool would open in a real implementation. In this demo, we\'re showing the UI structure.');
+            });
+        });
+
+        // Simulate chat functionality
+        document.querySelector('.stream-chat button').addEventListener('click', function() {
+            const chatInput = document.querySelector('.stream-chat input');
+            const chatMessages = document.querySelector('.chat-messages');
+            
+            if (chatInput.value.trim() !== '') {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = `You: ${chatInput.value}`;
+                messageDiv.style.marginBottom = '10px';
+                messageDiv.style.padding = '8px';
+                messageDiv.style.backgroundColor = '#e3f2fd';
+                messageDiv.style.borderRadius = '5px';
+                chatMessages.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Clear input
+                chatInput.value = '';
+            }
+        });
+
+        // Allow chat submission with Enter key
+        document.querySelector('.stream-chat input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.stream-chat button').click();
+            }
+        });
+
+        // Add some sample chat messages
+        window.addEventListener('DOMContentLoaded', () => {
+            const chatMessages = document.querySelector('.chat-messages');
+            const sampleMessages = [
+                "Admin: Welcome to the live stream!",
+                "User1: This is great content!",
+                "User2: How do I change the language?",
+                "Admin: Use the dropdown in the top right corner."
+            ];
+            
+            sampleMessages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.textContent = msg;
+                messageDiv.style.marginBottom = '10px';
+                messageDiv.style.padding = '8px';
+                messageDiv.style.backgroundColor = msg.startsWith('Admin') ? '#ffebee' : '#f5f5f5';
+                messageDiv.style.borderRadius = '5px';
+                chatMessages.appendChild(messageDiv);
+            });
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+        // Language translations
+        const translations = {
+            en: {
+                hero_title: "Welcome to Global Media Hub",
+                hero_text: "Access videos, live streams, PDF tools and more in your preferred language",
+                explore_btn: "Explore Media",
+                tools_btn: "Try Our Tools",
+                media_title: "Multimedia Content",
+                videos_tab: "Videos",
+                live_tab: "Live Streams",
+                youtube_tab: "YouTube",
+                video_not_supported: "Your browser does not support the video tag.",
+                video1_title: "Introduction to Our Platform",
+                video1_desc: "Learn how to use all features of our website",
+                video2_title: "Language Switching Guide",
+                video2_desc: "How to change languages on our platform",
+                live_title: "Live Broadcast",
+                live_text: "Join our live stream for real-time content",
+                chat_placeholder: "Type your message",
+                send_btn: "Send",
+                yt1_title: "Featured Content",
+                yt2_title: "Popular Video",
+                tools_title: "PDF & Image Tools",
+                pdf_merge: "PDF Merger",
+                pdf_merge_desc: "Combine multiple PDF files into one",
+                image_convert: "Image Converter",
+                image_convert_desc: "Convert between JPG, PNG, WEBP",
+                pdf_compress: "PDF Compressor",
+                pdf_compress_desc: "Reduce PDF file size",
+                image_editor: "Image Editor",
+                image_editor_desc: "Crop, resize and edit images",
+                use_tool: "Use Tool",
+                features_title: "Why Choose Our Platform",
+                feature1_title: "Multi-Language",
+                feature1_text: "Content available in multiple languages",
+                feature2_title: "Responsive Design",
+                feature2_text: "Works on all devices",
+                feature3_title: "Powerful Tools",
+                feature3_text: "PDF and image processing tools",
+                feature4_title: "Rich Media",
+                feature4_text: "Videos, live streams and more",
+                footer_about: "About Us",
+                footer_about_text: "Global Media Hub provides multilingual content and tools for users worldwide.",
+                footer_links: "Quick Links",
+                footer_home: "Home",
+                footer_media: "Media",
+                footer_tools: "Tools",
+                footer_about: "About",
+                footer_contact: "Contact",
+                footer_copyright: "© 2023 Global Media Hub. All rights reserved."
+            },
+            hi: {
+                hero_title: "ग्लोबल मीडिया हब में आपका स्वागत है",
+                hero_text: "अपनी पसंदीदा भाषा में वीडियो, लाइव स्ट्रीम, पीडीएफ टूल और बहुत कुछ एक्सेस करें",
+                explore_btn: "मीडिया एक्सप्लोर करें",
+                tools_btn: "हमारे टूल आज़माएं",
+                media_title: "मल्टीमीडिया सामग्री",
+                videos_tab: "वीडियो",
+                live_tab: "लाइव स्ट्रीम",
+                youtube_tab: "यूट्यूब",
+                video_not_supported: "आपका ब्राउज़र वीडियो टैग का समर्थन नहीं करता है।",
+                video1_title: "हमारे प्लेटफॉर्म का परिचय",
+                video1_desc: "हमारी वेबसाइट की सभी सुविधाओं का उपयोग करना सीखें",
+                video2_title: "भाषा स्विचिंग गाइड",
+                video2_desc: "हमारे प्लेटफॉर्म पर भाषाएं कैसे बदलें",
+                live_title: "लाइव प्रसारण",
+                live_text: "रीयल-टाइम सामग्री के लिए हमारे लाइव स्ट्रीम से जुड़ें",
+                chat_placeholder: "अपना संदेश टाइप करें",
+                send_btn: "भेजें",
+                yt1_title: "फीचर्ड सामग्री",
+                yt2_title: "लोकप्रिय वीडियो",
+                tools_title: "पीडीएफ और इमेज टूल",
+                pdf_merge: "पीडीएफ मर्जर",
+                pdf_merge_desc: "कई पीडीएफ फाइलों को एक में मिलाएं",
+                image_convert: "इमेज कन्वर्टर",
+                image_convert_desc: "JPG, PNG, WEBP के बीच कन्वर्ट करें",
+                pdf_compress: "पीडीएफ कंप्रेसर",
+                pdf_compress_desc: "पीडीएफ फाइल का आकार कम करें",
+                image_editor: "इमेज एडिटर",
+                image_editor_desc: "इमेज क्रॉप, रीसाइज़ और एडिट करें",
+                use_tool: "टूल का उपयोग करें",
+                features_title: "हमारे प्लेटफॉर्म को क्यों चुनें",
+                feature1_title: "बहुभाषी",
+                feature1_text: "कई भाषाओं में उपलब्ध सामग्री",
+                feature2_title: "उत्तरदायी डिजाइन",
+                feature2_text: "सभी डिवाइस पर काम करता है",
+                feature3_title: "शक्तिशाली टूल",
+                feature3_text: "पीडीएफ और इमेज प्रोसेसिंग टूल",
+                feature4_title: "समृद्ध मीडिया",
+                feature4_text: "वीडियो, लाइव स्ट्रीम और बहुत कुछ",
+                footer_about: "हमारे बारे में",
+                footer_about_text: "ग्लोबल मीडिया हब दुनिया भर के उपयोगकर्ताओं के लिए बहुभाषी सामग्री और टूल प्रदान करता है।",
+                footer_links: "त्वरित लिंक",
+                footer_home: "होम",
+                footer_media: "मीडिया",
+                footer_tools: "टूल",
+                footer_about: "हमारे बारे में",
+                footer_contact: "संपर्क करें",
+                footer_copyright: "© 2023 ग्लोबल मीडिया हब। सर्वाधिकार सुरक्षित।"
+            },
+            es: {
+                hero_title: "Bienvenido a Global Media Hub",
+                hero_text: "Accede a videos, transmisiones en vivo, herramientas PDF y más en tu idioma preferido",
+                explore_btn: "Explorar Medios",
+                tools_btn: "Probar Herramientas",
+                media_title: "Contenido Multimedia",
+                videos_tab: "Videos",
+                live_tab: "Transmisiones en Vivo",
+                youtube_tab: "YouTube",
+                video_not_supported: "Tu navegador no soporta el elemento de video.",
+                video1_title: "Introducción a Nuestra Plataforma",
+                video1_desc: "Aprende a usar todas las funciones de nuestro sitio web",
+                video2_title: "Guía para Cambiar de Idioma",
+                video2_desc: "Cómo cambiar idiomas en nuestra plataforma",
+                live_title: "Transmisión en Vivo",
+                live_text: "Únete a nuestra transmisión en vivo para contenido en tiempo real",
+                chat_placeholder: "Escribe tu mensaje",
+                send_btn: "Enviar",
+                yt1_title: "Contenido Destacado",
+                yt2_title: "Video Popular",
+                tools_title: "Herramientas PDF e Imágenes",
+                pdf_merge: "Combinar PDF",
+                pdf_merge_desc: "Combina múltiples archivos PDF en uno",
+                image_convert: "Convertidor de Imágenes",
+                image_convert_desc: "Convierte entre JPG, PNG, WEBP",
+                pdf_compress: "Compresor PDF",
+                pdf_compress_desc: "Reduce el tamaño de archivos PDF",
+                image_editor: "Editor de Imágenes",
+                image_editor_desc: "Recorta, redimensiona y edita imágenes",
+                use_tool: "Usar Herramienta",
+                features_title: "Por Qué Elegir Nuestra Plataforma",
+                feature1_title: "Multilingüe",
+                feature1_text: "Contenido disponible en múltiples idiomas",
+                feature2_title: "Diseño Responsivo",
+                feature2_text: "Funciona en todos los dispositivos",
+                feature3_title: "Herramientas Potentes",
+                feature3_text: "Herramientas para procesar PDF e imágenes",
+                feature4_title: "Medios Enriquecidos",
+                feature4_text: "Videos, transmisiones en vivo y más",
+                footer_about: "Sobre Nosotros",
+                footer_about_text: "Global Media Hub proporciona contenido multilingüe y herramientas para usuarios de todo el mundo.",
+                footer_links: "Enlaces Rápidos",
+                footer_home: "Inicio",
+                footer_media: "Medios",
+                footer_tools: "Herramientas",
+                footer_about: "Sobre Nosotros",
+                footer_contact: "Contacto",
+                footer_copyright: "© 2023 Global Media Hub. Todos los derechos reservados."
+            },
+            fr: {
+                hero_title: "Bienvenue sur Global Media Hub",
+                hero_text: "Accédez à des vidéos, des flux en direct, des outils PDF et plus encore dans votre langue préférée",
+                explore_btn: "Explorer les Médias",
+                tools_btn: "Essayer nos Outils",
+                media_title: "Contenu Multimédia",
+                videos_tab: "Vidéos",
+                live_tab: "Flux en Direct",
+                youtube_tab: "YouTube",
+                video_not_supported: "Votre navigateur ne prend pas en charge la balise vidéo.",
+                video1_title: "Introduction à Notre Plateforme",
+                video1_desc: "Apprenez à utiliser toutes les fonctionnalités de notre site Web",
+                video2_title: "Guide de Changement de Langue",
+                video2_desc: "Comment changer les langues sur notre plateforme",
+                live_title: "Diffusion en Direct",
+                live_text: "Rejoignez notre flux en direct pour du contenu en temps réel",
+                chat_placeholder: "Tapez votre message",
+                send_btn: "Envoyer",
+                yt1_title: "Contenu Vedette",
+                yt2_title: "Vidéo Populaire",
+                tools_title: "Outils PDF et Image",
+                pdf_merge: "Fusionneur PDF",
+                pdf_merge_desc: "Combinez plusieurs fichiers PDF en un seul",
+                image_convert: "Convertisseur d'Image",
+                image_convert_desc: "Convertir entre JPG, PNG, WEBP",
+                pdf_compress: "Compresseur PDF",
+                pdf_compress_desc: "Réduire la taille des fichiers PDF",
+                image_editor: "Éditeur d'Image",
+                image_editor_desc: "Recadrer, redimensionner et éditer des images",
+                use_tool: "Utiliser l'Outil",
+                features_title: "Pourquoi Choisir Notre Plateforme",
+                feature1_title: "Multilingue",
+                feature1_text: "Contenu disponible en plusieurs langues",
+                feature2_title: "Conception Réactive",
+                feature2_text: "Fonctionne sur tous les appareils",
+                feature3_title: "Outils Puissants",
+                feature3_text: "Outils de traitement PDF et d'image",
+                feature4_title: "Médias Riches",
+                feature4_text: "Vidéos, flux en direct et plus encore",
+                footer_about: "À Propos de Nous",
+                footer_about_text: "Global Media Hub fournit du contenu multilingue et des outils pour les utilisateurs du monde entier.",
+                footer_links: "Liens Rapides",
+                footer_home: "Accueil",
+                footer_media: "Médias",
+                footer_tools: "Outils",
+                footer_about: "À Propos",
+                footer_contact: "Contact",
+                footer_copyright: "© 2023 Global Media Hub. Tous droits réservés."
+            },
+            ar: {
+                hero_title: "مرحبًا بكم في مركز الإعلام العالمي",
+                hero_text: "الوصول إلى مقاطع الفيديو والبث المباشر وأدوات PDF والمزيد بلغتك المفضلة",
+                explore_btn: "استكشاف الوسائط",
+                tools_btn: "جرب أدواتنا",
+                media_title: "المحتوى المتعدد الوسائط",
+                videos_tab: "مقاطع الفيديو",
+                live_tab: "البث المباشر",
+                youtube_tab: "يوتيوب",
+                video_not_supported: "متصفحك لا يدعم علامة الفيديو.",
+                video1_title: "مقدمة عن منصتنا",
+                video1_desc: "تعلم كيفية استخدام جميع ميزات موقعنا",
+                video2_title: "دليل تغيير اللغة",
+                video2_desc: "كيفية تغيير اللغات على منصتنا",
+                live_title: "بث مباشر",
+                live_text: "انضم إلى بثنا المباشر للحصول على محتوى في الوقت الفعلي",
+                chat_placeholder: "اكتب رسالتك",
+                send_btn: "إرسال",
+                yt1_title: "محتوى مميز",
+                yt2_title: "فيديو شائع",
+                tools_title: "أدوات PDF والصور",
+                pdf_merge: "دمج PDF",
+                pdf_merge_desc: "دمج عدة ملفات PDF في ملف واحد",
+                image_convert: "محول الصور",
+                image_convert_desc: "تحويل بين JPG و PNG و WEBP",
+                pdf_compress: "ضاغط PDF",
+                pdf_compress_desc: "تقليل حجم ملف PDF",
+                image_editor: "محرر الصور",
+                image_editor_desc: "اقتصاص وتغيير حجم وتحرير الصور",
+                use_tool: "استخدم الأداة",
+                features_title: "لماذا تختار منصتنا",
+                feature1_title: "متعدد اللغات",
+                feature1_text: "محتوى متاح بعدة لغات",
+                feature2_title: "تصميم متجاوب",
+                feature2_text: "يعمل على جميع الأجهزة",
+                feature3_title: "أدوات قوية",
+                feature3_text: "أدوات معالجة PDF والصور",
+                feature4_title: "وسائط غنية",
+                feature4_text: "مقاطع فيديو وبث مباشر والمزيد",
+                footer_about: "معلومات عنا",
+                footer_about_text: "يوفر مركز الإعلام العالمي محتوى متعدد اللغات وأدوات للمستخدمين حول العالم.",
+                footer_links: "روابط سريعة",
+                footer_home: "الرئيسية",
+                footer_media: "الوسائط",
+                footer_tools: "الأدوات",
+                footer_about: "معلومات عنا",
+                footer_contact: "اتصل بنا",
+                footer_copyright: "© 2023 مركز الإعلام العالمي. جميع الحقوق محفوظة."
+            }
+        };
+
+        // Language switcher functionality
+        document.getElementById('language-select').addEventListener('change', function() {
+            const lang = this.value;
+            setLanguage(lang);
+        });
+
+        function setLanguage(lang) {
+            // Set all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Set all placeholder texts with data-i18n-ph attribute
+            document.querySelectorAll('[data-i18n-ph]').forEach(element => {
+                const key = element.getAttribute('data-i18n-ph');
+                if (translations[lang] && translations[lang][key]) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+            
+            // Set direction for RTL languages
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.body.classList.add('rtl');
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.body.classList.remove('rtl');
+            }
+            
+            // Store selected language in localStorage
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        // Initialize with saved language or default to English
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        document.getElementById('language-select').value = savedLanguage;
+        setLanguage(savedLanguage);
+    </script>
+</body>
+</html>
